@@ -1,0 +1,31 @@
+vi main.py
+vi Dockerfile 
+vi requirements.txt
+gcloud services enable artifactregistry.googleapis.com
+
+***********************
+Replace the repo name
+***********************
+gcloud artifacts repositories create pcd-repo   --repository-format=docker   --location=us-central1   --description="Repository for Cloud Run container images"
+
+***********************
+Replace the region name
+***********************
+
+gcloud auth configure-docker us-central1-docker.pkg.dev
+
+***********************
+Replace the package name and project name
+***********************
+
+gcloud builds submit --tag us-central1-docker.pkg.dev/node-js-project-360515/pcd-repo/hello-python .
+
+
+***********************
+Replace the package name and project name
+***********************
+gcloud run deploy hello-python \
+  --image=us-central1-docker.pkg.dev/node-js-project-360515/pcd-repo/hello-python \
+  --region=us-central1 \
+  --platform=managed \
+  --allow-unauthenticated
