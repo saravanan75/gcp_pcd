@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  title: hello-api
+  description: Sample API on API Gateway with a Cloud Run backend
+  version: '1.0.0'
+
+# Used by Endpoints / Service Management (not the public gateway.dev URL)
+host: hello-api.apigateway.node-js-project-360515.cloud.goog
+schemes:
+  - https
+produces:
+  - application/json
+
+paths:
+  /hello:
+    get:
+      summary: Returns a greeting
+      operationId: hello
+      x-google-backend:
+        address: https://hello-api-1087441589812.us-central1.run.app
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
