@@ -1,0 +1,11 @@
+main:
+  steps:
+    - init:
+        assign:
+          - message: "Hello from scheduled workflow!"
+          - timestamp: ${sys.now()}
+    - log_message:
+        call: sys.log
+        args:
+          text: ${message + " executed at " + timestamp}
+          severity: INFO
